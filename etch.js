@@ -1,25 +1,53 @@
 let sixteen = document.querySelector("#sixteen");
 let grid = document.querySelector(".container");
-grid.style.display = "flex";
+let divs = document.querySelectorAll("div");
+
+function initialGrid(){
+    let size = 16;
+    let cellSize = 100 / size;
+    for (let j = 0; j < size * size; j++){  
+        const row = document.createElement("div");
+        row.className = "square";
+        row.setAttribute("style","background: white; outline: 1px solid black;");
+        row.style.width = `${cellSize}%`;
+        row.style.aspectRatio = "1 / 1";
+            //Add row to grid
+        grid.appendChild(row);
+    }
+    let square = document.querySelectorAll(".square");
+    square.forEach(square => {
+        square.addEventListener("mouseenter", () => {
+            square.style.backgroundColor = "red";
+        })
+        square.addEventListener("mouseleave", () => {
+            square.style.backgroundColor = "black";
+        })
+    })  
+}
+initialGrid();
 sixteen.addEventListener("click", () => {
     console.log("button clicked");
-    //Create 16 rows of 16 boxes
-    for (let j = 0; j < 16; j++){  
-        const col = document.createElement("div")
-        for (let i = 0; i < 16; i++){
-            //Create a div that is a row
-            const row = document.createElement("div");
-            row.className = "square";
-            row.setAttribute("style", "color: black; background: red; outline: 1px solid black; height: 50px; width: 50px; padding: 1px;")
+    grid.innerHTML = '';
+    size = window.prompt("Choose number of sides for grid");
+    let cellSize = 100 / size;
+    for (let j = 0; j < size * size; j++){  
+        const row = document.createElement("div");
+        row.className = "square";
+        row.setAttribute("style","background: white; outline: 1px solid black;");
+        row.style.width = `${cellSize}%`;
+        row.style.aspectRatio = "1 / 1";
             //Add row to grid
-            col.appendChild(row);
-            }
-        grid.appendChild(col);
-        }
+        grid.appendChild(row);
+    }
     let square = document.querySelectorAll(".square")
-    grid.addEventListener("mouseenter", () => {
-        console.log("Mouse hovered");
-        row.setAttribute("style", "background: black;");
+    square.forEach(square => {
+        square.addEventListener("mouseenter", () => {
+            square.style.backgroundColor = "red";
         })
-    } 
-)
+        square.addEventListener("mouseleave", () => {
+            square.style.backgroundColor = "black";
+        })
+    })
+})
+
+
